@@ -90,8 +90,8 @@ public class CollaboratorRestV2Controller extends BaseController implements Para
 	public void deleteCollaborator(@PathVariable(ID) String gooruOid, @RequestParam String data, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		this.getCollaboratorService().deleteCollaborator(gooruOid, JsonDeserializer.deserialize(data, new TypeReference<List<String>>() {
 		}));
-		JSONObject payLoadObject = SessionContextSupport.getLog().get("payLoadObject") != null ? new JSONObject(SessionContextSupport.getLog().get("payLoadObject").toString()) :  new JSONObject();
-		payLoadObject.put("mode", "delete");		
+		JSONObject payLoadObject = SessionContextSupport.getLog().get(PAY_LOAD_OBJECT) != null ? new JSONObject(SessionContextSupport.getLog().get(PAY_LOAD_OBJECT).toString()) :  new JSONObject();
+		payLoadObject.put(MODE, DELETE);		
 	}
 
 	public CollaboratorService getCollaboratorService() {
