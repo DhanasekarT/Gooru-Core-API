@@ -128,7 +128,7 @@ public class ClasspageRestV2Controller extends BaseController implements Constan
 		if (responseDTO.getErrors().getErrorCount() > 0) {
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
-			SessionContextSupport.putLogParameter(EVENT_NAME, "classpage-update");
+			SessionContextSupport.putLogParameter(EVENT_NAME, CLASSPAGE_UPDATE);
 			SessionContextSupport.putLogParameter(CLASSPAGE_ID, classpageId);
 			SessionContextSupport.putLogParameter(GOORU_UID, user.getPartyUid());
 		}
@@ -180,7 +180,7 @@ public class ClasspageRestV2Controller extends BaseController implements Constan
 	public void deleteClasspage(@PathVariable(value = ID) String classpageId, HttpServletRequest request, HttpServletResponse response) {
 		getClasspageService().deleteClasspage(classpageId);
 
-		SessionContextSupport.putLogParameter(EVENT_NAME, "classpage-delete");
+		SessionContextSupport.putLogParameter(EVENT_NAME, CLASSPAGE_DEL );
 		SessionContextSupport.putLogParameter(CLASSPAGE_ID, classpageId);
 	}
 
@@ -238,7 +238,7 @@ public class ClasspageRestV2Controller extends BaseController implements Constan
 			if (newCollectionItem.getStatus() != null) {
 				getClasspageService().updateAssignment(collectionItemId, newCollectionItem.getStatus(), user);
 			}
-			SessionContextSupport.putLogParameter(EVENT_NAME, "classpage-item-update");
+			SessionContextSupport.putLogParameter(EVENT_NAME, CLASSPAGE_ITEM_UPDATE);
 			SessionContextSupport.putLogParameter(COLLECTION_ITEM_ID, collectionItemId);
 		}
 		String includes[] = (String[]) ArrayUtils.addAll(RESOURCE_INCLUDE_FIELDS, COLLECTION_ITEM_INCLUDE_FILEDS);
@@ -379,7 +379,7 @@ public class ClasspageRestV2Controller extends BaseController implements Constan
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 			
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-item-re-order");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_ITEM_REORDER);
 			SessionContextSupport.putLogParameter(COLLECTION_ITEM_ID, responseDTO.getModel().getCollectionItemId());
 		}
 		String includes[] = (String[]) ArrayUtils.addAll(RESOURCE_INCLUDE_FIELDS, COLLECTION_INCLUDE_FIELDS);
