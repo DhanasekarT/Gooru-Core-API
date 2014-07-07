@@ -99,7 +99,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 			response.setStatus(HttpServletResponse.SC_CREATED);
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-folder-create");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_CREATE);
 			SessionContextSupport.putLogParameter(GOORU_OID, responseDTO.getModel().getGooruOid());
 			SessionContextSupport.putLogParameter(GOORU_UID, user.getPartyUid());
 		}
@@ -120,7 +120,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-folder-update");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_UPDATE);
 			SessionContextSupport.putLogParameter(GOORU_UID, user.getPartyUid());
 			SessionContextSupport.putLogParameter(COLLECTION_ID, collectionId);
 		}
@@ -141,9 +141,9 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 	@RequestMapping(value = { "/{id}" }, method = RequestMethod.DELETE)
 	public void deleteFolder(@PathVariable(value = ID) String collectionId, HttpServletRequest request, HttpServletResponse response) {
 		User user = (User) request.getAttribute(Constants.USER);
-		SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-folder-delete");
+		SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_DELETE);
 		getCollectionService().deleteCollection(collectionId, user);
-		SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-delete");
+		SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_DELETE);
 		SessionContextSupport.putLogParameter(COLLECTION_ID, collectionId);
 	}
 
@@ -158,7 +158,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 			response.setStatus(HttpServletResponse.SC_CREATED);
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-folder-item-create");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_ITEM_CREATE);
 			SessionContextSupport.putLogParameter(GOORU_UID, user.getPartyUid());
 			SessionContextSupport.putLogParameter(COLLECTION_ID, collectionId);
 		}
@@ -176,7 +176,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-folder-item-update");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_FOLDER_ITEM_UPDATE);
 			SessionContextSupport.putLogParameter(COLLECTION_ITEM_ID, collectionItemId);
 		}
 		String[] includes = (String[]) ArrayUtils.addAll(COLLECTION_ITEM_INCLUDE_FILEDS, ERROR_INCLUDE);
@@ -186,7 +186,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 	@AuthorizeOperations(operations = { GooruOperationConstants.OPERATION_SCOLLECTION_ITEM_LIST })
 	@RequestMapping(value = { "/{id}/item" }, method = RequestMethod.GET)
 	public ModelAndView getFolderItems(@PathVariable(value = ID) String collectionId, @RequestParam(value = OFFSET_FIELD, required = false, defaultValue = "0") Integer offset, @RequestParam(value = ORDER_BY, required = false) String orderBy,
-			@RequestParam(value = LIMIT_FIELD, required = false, defaultValue = "20") Integer limit, @RequestParam(value = SHARING, required = false, defaultValue = "private,public,anyonewithlink") String sharing, @RequestParam(value = "collectionType", required = false) String collectionType,
+			@RequestParam(value = LIMIT_FIELD, required = false, defaultValue = "20") Integer limit, @RequestParam(value = SHARING, required = false, defaultValue = "private,public,anyonewithlink") String sharing, @RequestParam(value = COLLECTION_TYPE, required = false) String collectionType,
 			@RequestParam(value = ITEM_LIMIT_FIELD, required = false, defaultValue = "4") Integer itemLimit, @RequestParam(value = FETCH_CHILDS, required = false, defaultValue = "false") boolean fetchChilds,
 			@RequestParam(value = CLEAR_CACHE, required = false, defaultValue = FALSE) boolean clearCache, HttpServletRequest request, HttpServletResponse response) throws Exception {
 
@@ -201,7 +201,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 	@RequestMapping(value = { "/item/{id}" }, method = RequestMethod.DELETE)
 	public void deleteCollectionItem(@PathVariable(value = ID) String collectionItemId, HttpServletRequest request, HttpServletResponse response) {
 		User user = (User) request.getAttribute(Constants.USER);
-		SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-item-delete");
+		SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_ITEM_DELETE);
 		SessionContextSupport.putLogParameter(COLLECTION_ITEM_ID, collectionItemId);
 		getCollectionService().deleteCollectionItem(collectionItemId, user);
 	}
@@ -215,7 +215,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 
-			SessionContextSupport.putLogParameter(EVENT_NAME, "scollection-item-re-order");
+			SessionContextSupport.putLogParameter(EVENT_NAME, SCOLLECTION_ITEM_RE_ORDER);
 			SessionContextSupport.putLogParameter(COLLECTION_ITEM_ID, responseDTO.getModel().getCollectionItemId());
 		}
 		String[] includes = (String[]) ArrayUtils.addAll(COLLECTION_ITEM_INCLUDE_FILEDS, ERROR_INCLUDE);
@@ -234,7 +234,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 			response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 		} else {
 
-			SessionContextSupport.putLogParameter(EVENT_NAME, "move-collection-folder");
+			SessionContextSupport.putLogParameter(EVENT_NAME, MOVE_COLLECTION_FOLDER);
 			SessionContextSupport.putLogParameter(GOORU_UID, user.getPartyUid());
 		}
 		String[] includes = (String[]) ArrayUtils.addAll(COLLECTION_CREATE_ITEM_INCLUDE_FILEDS, ERROR_INCLUDE);
@@ -245,7 +245,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 	@AuthorizeOperations(operations = { GooruOperationConstants.OPERATION_SCOLLECTION_READ })
 	@RequestMapping(value = { "/{id}/workspace" }, method = RequestMethod.GET)
 	public ModelAndView getMyWorkspace(@PathVariable(value = ID) String gooruUid, HttpServletRequest request, @RequestParam(value = OFFSET_FIELD, required = false, defaultValue = "0") Integer offset, @RequestParam(value = LIMIT_FIELD, required = false, defaultValue = "20") Integer limit,
-			@RequestParam(value = SHARING, required = false, defaultValue = "private,public,anyonewithlink") String sharing, @RequestParam(value = "collectionType", required = false) String collectionType,
+			@RequestParam(value = SHARING, required = false, defaultValue = "private,public,anyonewithlink") String sharing, @RequestParam(value = COLLECTION_TYPE, required = false) String collectionType,
 			@RequestParam(value = ITEM_LIMIT_FIELD, required = false, defaultValue = "4") Integer itemLimit, @RequestParam(value = FETCH_CHILDS, required = false, defaultValue = "false") boolean fetchChilds,
 			@RequestParam(value = TOP_LEVEL_COLLECTION_TYPE, required = false) String topLevelCollectionType, @RequestParam(value = CLEAR_CACHE, required = false, defaultValue = FALSE) boolean clearCache, HttpServletResponse resHttpServletResponse) {
 		if (gooruUid.equalsIgnoreCase(MY)) {
@@ -271,7 +271,7 @@ public class FolderRestV2Controller extends BaseController implements ConstantPr
 	@AuthorizeOperations(operations = { GooruOperationConstants.OPERATION_SCOLLECTION_READ })
 	@RequestMapping(value = { "" }, method = RequestMethod.GET)
 	public ModelAndView getFolderList(HttpServletRequest request, @RequestParam(value = OFFSET_FIELD, required = false, defaultValue = "0") Integer offset, @RequestParam(value = LIMIT_FIELD, required = false, defaultValue = "20") Integer limit,
-			@RequestParam(value = ID, required = false) String gooruOid, @RequestParam(value = "title", required = false) String title, @RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = ID, required = false) String gooruOid, @RequestParam(value = TITLE, required = false) String title, @RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = SKIP_PAGINATION, required = false, defaultValue = FALSE) boolean skipPagination, HttpServletResponse resHttpServletResponse) {
 		Map<String, Object> content = new HashMap<String, Object>();
 		content.put(SEARCH_RESULT, this.getCollectionService().getFolderList(limit, offset, gooruOid, title, username, skipPagination));
