@@ -600,9 +600,21 @@ public interface ConstantProperties {
    
    public static String CURRICULAM_CODE_JSON="curriculum-code-json";
    
+   public static String SCOLLECTION_FOLDER_CREATE="scollection-folder-create";
    
+   public static String SCOLLECTION_FOLDER_UPDATE="scollection-folder-update";
+   
+   public static String SCOLLECTION_FOLDER_DELETE="scollection-folder-delete";
+   
+   public static String SCOLLECTION_FOLDER_ITEM_CREATE="scollection-folder-item-create";
+   
+   public static String SCOLLECTION_ITEM_RE_ORDER ="scollection-item-re-order";
+   
+   public static String SCOLLECTION_FOLDER_ITEM_UPDATE="scollection-folder-item-update";
+   
+   public static String SCOLLECTION_ITEM_DELETE="scollection-item-delete";
     
-    
+   
     
     
     
