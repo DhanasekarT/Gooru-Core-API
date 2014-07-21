@@ -243,15 +243,15 @@ public class TagServiceImpl extends BaseServiceImpl implements TagService, Param
  						aggregator.add(contentProviderAssociation.getContentProvider().getContentProviderName());
  					}
  				}
- 				result.put("publisher", publisher);
- 				result.put("aggregator", aggregator);
+ 				result.put(PUBLISHER, publisher);
+ 				result.put(AGGREGATOR, aggregator);
  			}
-			result.put("views", object[7]);
+			result.put(VIEWS, object[7]);
 			result.put(RATINGS, this.getFeedbackService().getContentFeedbackStarRating(String.valueOf(object[1])));
 			resource.add(result);
 		}
-		content.put("searchResult",resource);
-		content.put("totalHitCount",this.getTagRepository().getResourceByLabelCount(label, user.getPartyUid()));
+		content.put(SEARCH_RESULT,resource);
+		content.put(TOTAL_HIT_COUNT,this.getTagRepository().getResourceByLabelCount(label, user.getPartyUid()));
 		return content;
 	}
 
